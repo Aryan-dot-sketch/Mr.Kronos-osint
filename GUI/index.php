@@ -1,0 +1,8 @@
+<?php
+/*ORIGINAL CREATOR: Aryan
+AUTHOR: Aryan
+Copyright (C) 2021-2026 Aryan <mr.kronos@proton.me>
+License: GNU General Public License v3.0*/ 
+
+require("Actions/Login_Controller.php");
+?>

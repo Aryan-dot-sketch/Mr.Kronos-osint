@@ -1,0 +1,13 @@
+/*ORIGINAL CREATOR: Aryan
+AUTHOR: Aryan
+Copyright (C) 2023-2026 Aryan <mr.kronos@proton.me>
+License: GNU General Public License v3.0*/
+
+@import url("Map.css");
+
+#map{
+    height:400px;
+    width:100%;
+    margin-top:-20px;
+    margin-left:-5px;
+}

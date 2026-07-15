@@ -1,0 +1,139 @@
+/*
+ * ╔══════════════════════════════════════════════════════════╗
+ * ║        MR.KRONOS — SECURE TRANSFER PORTAL              ║
+ * ║        Premium Classic Design                           ║
+ * ╚══════════════════════════════════════════════════════════╝
+ */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Source+Code+Pro:wght@400;500;600&display=swap');
+
+:root {
+  --navy: #1a2744;
+  --navy-light: #243656;
+  --gold: #c8a84e;
+  --gold-light: #d4b96a;
+  --cream: #f8f5f0;
+  --charcoal: #2c2c2c;
+  --slate: #5a6470;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  background: var(--cream);
+  background-image:
+    linear-gradient(rgba(26, 39, 68, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 39, 68, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  color: var(--charcoal);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.transfer-container {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border: 1px solid rgba(26, 39, 68, 0.06);
+  border-radius: 4px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 32px rgba(26, 39, 68, 0.05);
+}
+
+.transfer-container .monogram {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.25rem;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.transfer-container h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+}
+
+.transfer-container p {
+  color: var(--slate);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.transfer-container .accent-line {
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto 1.5rem;
+}
+
+.transfer-container .file-info {
+  background: #faf9f7;
+  border: 1px solid rgba(26, 39, 68, 0.06);
+  border-radius: 2px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  word-break: break-all;
+  font-family: 'Source Code Pro', 'Consolas', monospace;
+  font-size: 0.75rem;
+  color: var(--navy);
+  text-align: left;
+}
+
+.transfer-container a,
+.transfer-container button {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  margin: 0.5rem;
+  background: var(--navy);
+  color: var(--cream);
+  border: 2px solid var(--navy);
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.transfer-container a:hover,
+.transfer-container button:hover {
+  background: var(--navy-light);
+  border-color: var(--navy-light);
+}
+
+.qr-section {
+  margin: 1.5rem 0;
+}
+
+.qr-section img {
+  border: 1px solid rgba(26, 39, 68, 0.08);
+  padding: 0.75rem;
+  background: #fff;
+}
+
+.footer-note {
+  margin-top: 1.5rem;
+  font-size: 0.65rem;
+  color: var(--slate);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
