@@ -33,7 +33,14 @@ class Main:
         return conf
 
     def Menu(Mode):
+        try:
         Menu.Main.main(Mode)
+    except KeyboardInterrupt:
+        print("\n\nInterrupted. Exiting Mr.Kronos.")
+    except Exception as e:
+        print(f"\nFatal error: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     Mode = Main.Controll_Display()

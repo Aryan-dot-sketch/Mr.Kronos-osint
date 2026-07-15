@@ -173,56 +173,64 @@ class Mail_search:
 
     @staticmethod
     def Search(username, Mode):
-        Mail_search.Banner(Mode)
-        print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + "INFO:" + "[{}]".format(Font.Color.GREEN + Language.Translation.Translate_Language(filename,"Email","Explanation","None") + Font.Color.WHITE) )
-        now = datetime.now()
-        dataformat = DateFormat.Get.Format()
-        dt_string = now.strftime(dataformat)
-        Date = "Date: " + str(dt_string)
-        folder = "GUI/Reports/E-Mail/" + username
-        report = "GUI/Reports/E-Mail/{}/{}.txt".format(username,username)
-        report2 = "GUI/Reports/E-Mail/{}/{}.mh".format(username,username)
-        if os.path.isfile(report):
-            os.remove(report)
-            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
-                  Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
-        elif os.path.isfile(report2):
-            os.remove(report2)
-            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
-                  Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
-        else:
-            os.makedirs(folder, exist_ok=True)
-        f = open(report, "w")
-        f.write("SCANNING EXECUTED ON:\n" + Date + "\n")
-        f.close()
-        isvalid = mail.Validator.Mail(username, report)
-        if isvalid:
-            Mail_search.Lookup(username, report)
-            lookup = int(input(Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + "WOULD YOU LIKE TO CHECK IF THIS EMAIL IS USED ON SOME SOCIAL MEDIA?(1)YES(2)NO\n\n" + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-            if lookup == 1:
-                Lookup.List.Main(report,username)
-            Mail_search.searcher(username, report, Mode)
-            choice = int(input(
-                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Dorks", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-            if choice == 1:
-                Mail_search.Google_dork(username)
-                Mail_search.Yandex_dork(username)
+        try:
+            Mail_search.Banner(Mode)
+            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + "INFO:" + "[{}]".format(Font.Color.GREEN + Language.Translation.Translate_Language(filename,"Email","Explanation","None") + Font.Color.WHITE) )
+            now = datetime.now()
+            dataformat = DateFormat.Get.Format()
+            dt_string = now.strftime(dataformat)
+            Date = "Date: " + str(dt_string)
+            folder = "GUI/Reports/E-Mail/" + username
+            report = "GUI/Reports/E-Mail/{}/{}.txt".format(username,username)
+            report2 = "GUI/Reports/E-Mail/{}/{}.mh".format(username,username)
+            if os.path.isfile(report):
+                os.remove(report)
+                print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
+                      Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
+            elif os.path.isfile(report2):
+                os.remove(report2)
+                print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
+                      Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
             else:
-                pass
-            print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
-                os.getcwd() + "/" + report)
-            f = open(report, "a")
-            f.write(Language.Translation.Translate_Language(
-                filename, "Report", "Default", "By"))
+                os.makedirs(folder, exist_ok=True)
+            f = open(report, "w")
+            f.write("SCANNING EXECUTED ON:\n" + Date + "\n")
             f.close()
-            print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
-                report)
-            Notification.Notifier.Start(Mode)
-            Creds.Sender.mail(report, username)
-            choice = int(input(
-                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Transfer", "Question", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-            if choice == 1:
-                FileTransfer.Transfer.File(report, username, ".txt")
-            Encoding.Encoder.Encode(report)
-            inp = input(Language.Translation.Translate_Language(
-                filename, "Default", "Continue", "None"))
+            isvalid = mail.Validator.Mail(username, report)
+            if isvalid:
+                Mail_search.Lookup(username, report)
+                lookup = int(input(Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + "WOULD YOU LIKE TO CHECK IF THIS EMAIL IS USED ON SOME SOCIAL MEDIA?(1)YES(2)NO\n\n" + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                if lookup == 1:
+                    Lookup.List.Main(report,username)
+                Mail_search.searcher(username, report, Mode)
+                choice = int(input(
+                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Dorks", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                if choice == 1:
+                    Mail_search.Google_dork(username)
+                    Mail_search.Yandex_dork(username)
+                else:
+                    pass
+                print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
+                    os.getcwd() + "/" + report)
+                f = open(report, "a")
+                f.write(Language.Translation.Translate_Language(
+                    filename, "Report", "Default", "By"))
+                f.close()
+                print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
+                    report)
+                Notification.Notifier.Start(Mode)
+                Creds.Sender.mail(report, username)
+                choice = int(input(
+                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Transfer", "Question", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                if choice == 1:
+                    FileTransfer.Transfer.File(report, username, ".txt")
+                Encoding.Encoder.Encode(report)
+                inp = input(Language.Translation.Translate_Language(
+                    filename, "Default", "Continue", "None"))
+        except KeyboardInterrupt:
+            raise
+        except Exception as e:
+            print("\n[!] ERROR in {}: {}".format("Core/E_Mail.py", str(e)))
+            import traceback
+            traceback.print_exc()
+    

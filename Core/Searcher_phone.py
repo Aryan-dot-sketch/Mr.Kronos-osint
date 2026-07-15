@@ -239,41 +239,49 @@ class Phone_search:
 
     @staticmethod
     def searcher(username, Mode):
-        Phone_search.Banner(Mode)
-        print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + "INFO:" + "[{}]".format(Font.Color.GREEN + Language.Translation.Translate_Language(filename,"Phone","Explanation","None") + Font.Color.WHITE) )
-        now = datetime.now()
-        dataformat = DateFormat.Get.Format()
-        dt_string = now.strftime(dataformat)
-        Date = "Date: " + str(dt_string)
-        folder = "GUI/Reports/Phone/" + username + "/"
-        if os.path.isdir(folder):
-            shutil.rmtree(folder)
-            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
-                  Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
-        os.makedirs(folder, exist_ok=True)
-        report = folder + username + ".txt"
-        f = open(report, "w")
-        f.write(Language.Translation.Translate_Language(
-            filename, "Report", "Default", "Date").format(Date) + "\n")
-        f.close()
-        num = username
-        code = 1
-        international = Numbers.Phony.Number(num, report, code, Mode, Type, username)
-        Phone_search.lookup(username, report, international)
-        print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
-         report)
-        f = open(report, "a")
-        f.write(Language.Translation.Translate_Language(
-            filename, "Report", "Default", "By"))
-        f.close()
-        Notification.Notifier.Start(Mode)
-        Creds.Sender.mail(report, username)
-        choice = int(input(
-                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Transfer", "Question", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-        if choice == 1:
-            FileTransfer.Transfer.File(report,username,".txt")
-        Encoding.Encoder.Encode(report)
-        print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
-        report)
-        inp = input(Language.Translation.Translate_Language(
-                        filename, "Default", "Continue", "None"))
+        try:
+            Phone_search.Banner(Mode)
+            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + "INFO:" + "[{}]".format(Font.Color.GREEN + Language.Translation.Translate_Language(filename,"Phone","Explanation","None") + Font.Color.WHITE) )
+            now = datetime.now()
+            dataformat = DateFormat.Get.Format()
+            dt_string = now.strftime(dataformat)
+            Date = "Date: " + str(dt_string)
+            folder = "GUI/Reports/Phone/" + username + "/"
+            if os.path.isdir(folder):
+                shutil.rmtree(folder)
+                print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
+                      Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
+            os.makedirs(folder, exist_ok=True)
+            report = folder + username + ".txt"
+            f = open(report, "w")
+            f.write(Language.Translation.Translate_Language(
+                filename, "Report", "Default", "Date").format(Date) + "\n")
+            f.close()
+            num = username
+            code = 1
+            international = Numbers.Phony.Number(num, report, code, Mode, Type, username)
+            Phone_search.lookup(username, report, international)
+            print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
+             report)
+            f = open(report, "a")
+            f.write(Language.Translation.Translate_Language(
+                filename, "Report", "Default", "By"))
+            f.close()
+            Notification.Notifier.Start(Mode)
+            Creds.Sender.mail(report, username)
+            choice = int(input(
+                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Transfer", "Question", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+            if choice == 1:
+                FileTransfer.Transfer.File(report,username,".txt")
+            Encoding.Encoder.Encode(report)
+            print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
+            report)
+            inp = input(Language.Translation.Translate_Language(
+                            filename, "Default", "Continue", "None"))
+        except KeyboardInterrupt:
+            raise
+        except Exception as e:
+            print("\n[!] ERROR in {}: {}".format("Core/Searcher_phone.py", str(e)))
+            import traceback
+            traceback.print_exc()
+    

@@ -728,144 +728,152 @@ class Web:
 
     @staticmethod
     def search(username, Mode):
-        os.system("cls" if os.name == "nt" else "clear")
-        Web.Banner(Mode)
-        print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + "INFO:" + "[{}]".format(Font.Color.GREEN + Language.Translation.Translate_Language(filename,"Website","Default","Explanation") + Font.Color.WHITE) )
-        folder = "GUI/Reports/Websites/" + username + "/"
-        if os.path.isdir(folder):
-            shutil.rmtree(folder)
-            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
-                  Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
-        os.makedirs(folder, exist_ok=True)
-        report = "GUI/Reports/Websites/{}/{}.txt".format(username, username)
-        report_Ip = "GUI/Reports/Websites/Coordinates/Ip_Geolocation/" + username + ".json"
-        now = datetime.now()
-        dataformat = DateFormat.Get.Format()
-        dt_string = now.strftime(dataformat)
-        Date = "Date: " + str(dt_string)
-        print(Font.Color.GREEN + "\n[+]" + Font.Color.WHITE +
-              Language.Translation.Translate_Language(filename, "Website", "Default", "Search").format(username))
-        sleep(3)
-        source = "http://ip-api.com/json/" + username
-        access = urllib.request.urlopen(source)
-        content = access.read()
-        final = json.loads(content)
-        status = final["status"]
-        if status != "fail":
-            ip = "IP: " + final["query"]
-            country = "NATION: " + final["country"]
-            country_code = "NATION-CODE: " + final["countryCode"]
-            region = "REGION-CODE: " + final["region"]
-            regionName = "REGION-NAME: " + final["regionName"]
-            city = "CITY: " + final["city"]
-            timezone = "TIMEZONE: " + final["timezone"]
-            isp = "ISP: " + final["isp"]
-            org = "ORG: " + final["org"]
-            asp = "AS: " + final["as"]
-            lat2 = str(final["lat"])
-            final_lat = "LAT: {}".format(lat2)
-            lon2 = str(final["lon"])
-            final_lon = "LONG: {}".format(lon2)
-            zip_data = "ZIP/POSTAL-CODE: " + final["zip"]
-            link = "https://www.google.com/maps/place/{},{}".format(lat2, lon2)
-            print(Font.Color.YELLOW + "\n[v]" + Font.Color.WHITE + ip)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + country)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + country_code)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + region)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + regionName)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + city)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + timezone)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + isp)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + org)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + asp)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + final_lat)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + final_lon)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + zip_data)
-            print(Font.Color.GREEN +
-                  "\n[+]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Default", "Maps"))
-            sleep(2)
-            print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + link)
-            f = open(report, "a")
-            f.write(Language.Translation.Translate_Language(
-                filename, "Report", "Default", "Date").format(Date) + "\r\n")
-            f.write(ip + "\r\n")
-            f.write(country + "\r\n")
-            f.write(country_code + "\r\n")
-            f.write(region + "\r\n")
-            f.write(regionName + "\r\n")
-            f.write(city + "\r\n")
-            f.write(timezone + "\r\n")
-            f.write(isp + "\r\n")
-            f.write(org + "\r\n")
-            f.write(asp + "\r\n")
-            f.write(final_lat + "\r\n")
-            f.write(final_lon + "\r\n")
-            f.write(zip_data + "\r\n")
-            f.close()
-            data = {
-                "Geolocation": {
-                    "Latitude": lat2.replace(" ", "%20"),
-                    "Longitude": lon2.replace(" ", "%20")
+        try:
+            os.system("cls" if os.name == "nt" else "clear")
+            Web.Banner(Mode)
+            print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + "INFO:" + "[{}]".format(Font.Color.GREEN + Language.Translation.Translate_Language(filename,"Website","Default","Explanation") + Font.Color.WHITE) )
+            folder = "GUI/Reports/Websites/" + username + "/"
+            if os.path.isdir(folder):
+                shutil.rmtree(folder)
+                print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
+                      Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
+            os.makedirs(folder, exist_ok=True)
+            report = "GUI/Reports/Websites/{}/{}.txt".format(username, username)
+            report_Ip = "GUI/Reports/Websites/Coordinates/Ip_Geolocation/" + username + ".json"
+            now = datetime.now()
+            dataformat = DateFormat.Get.Format()
+            dt_string = now.strftime(dataformat)
+            Date = "Date: " + str(dt_string)
+            print(Font.Color.GREEN + "\n[+]" + Font.Color.WHITE +
+                  Language.Translation.Translate_Language(filename, "Website", "Default", "Search").format(username))
+            sleep(3)
+            source = "http://ip-api.com/json/" + username
+            access = urllib.request.urlopen(source)
+            content = access.read()
+            final = json.loads(content)
+            status = final["status"]
+            if status != "fail":
+                ip = "IP: " + final["query"]
+                country = "NATION: " + final["country"]
+                country_code = "NATION-CODE: " + final["countryCode"]
+                region = "REGION-CODE: " + final["region"]
+                regionName = "REGION-NAME: " + final["regionName"]
+                city = "CITY: " + final["city"]
+                timezone = "TIMEZONE: " + final["timezone"]
+                isp = "ISP: " + final["isp"]
+                org = "ORG: " + final["org"]
+                asp = "AS: " + final["as"]
+                lat2 = str(final["lat"])
+                final_lat = "LAT: {}".format(lat2)
+                lon2 = str(final["lon"])
+                final_lon = "LONG: {}".format(lon2)
+                zip_data = "ZIP/POSTAL-CODE: " + final["zip"]
+                link = "https://www.google.com/maps/place/{},{}".format(lat2, lon2)
+                print(Font.Color.YELLOW + "\n[v]" + Font.Color.WHITE + ip)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + country)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + country_code)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + region)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + regionName)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + city)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + timezone)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + isp)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + org)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + asp)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + final_lat)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + final_lon)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + zip_data)
+                print(Font.Color.GREEN +
+                      "\n[+]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Default", "Maps"))
+                sleep(2)
+                print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + link)
+                f = open(report, "a")
+                f.write(Language.Translation.Translate_Language(
+                    filename, "Report", "Default", "Date").format(Date) + "\r\n")
+                f.write(ip + "\r\n")
+                f.write(country + "\r\n")
+                f.write(country_code + "\r\n")
+                f.write(region + "\r\n")
+                f.write(regionName + "\r\n")
+                f.write(city + "\r\n")
+                f.write(timezone + "\r\n")
+                f.write(isp + "\r\n")
+                f.write(org + "\r\n")
+                f.write(asp + "\r\n")
+                f.write(final_lat + "\r\n")
+                f.write(final_lon + "\r\n")
+                f.write(zip_data + "\r\n")
+                f.close()
+                data = {
+                    "Geolocation": {
+                        "Latitude": lat2.replace(" ", "%20"),
+                        "Longitude": lon2.replace(" ", "%20")
+                    }
                 }
-            }
-
-            with open(report_Ip, "w", encoding='utf-8') as outupt:
-                json.dump(data, outupt, ensure_ascii=False, indent=4)
-            Map.Creation.mapWeb(report_Ip, lat2, lon2, username)
-        else:
-            print(Font.Color.RED + "[!]" + Font.Color.WHITE +
-                  Language.Translation.Translate_Language(filename, "Website", "Default", "NoResponse"))
-        choice = int(input(
-            Font.Color.BLUE + " \n[+]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Whois") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-        if choice == 1:
-            Web.whois_lookup(username, report, Mode)
-        else:
-            num = None
-            number = False
-            email = False
-            email2 = False
-            choice = int(input(
-                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Dorks", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-            if choice == 1:
-                Web.google_dork(username, number, num,email,email2)
+    
+                with open(report_Ip, "w", encoding='utf-8') as outupt:
+                    json.dump(data, outupt, ensure_ascii=False, indent=4)
+                Map.Creation.mapWeb(report_Ip, lat2, lon2, username)
             else:
+                print(Font.Color.RED + "[!]" + Font.Color.WHITE +
+                      Language.Translation.Translate_Language(filename, "Website", "Default", "NoResponse"))
+            choice = int(input(
+                Font.Color.BLUE + " \n[+]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Whois") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+            if choice == 1:
+                Web.whois_lookup(username, report, Mode)
+            else:
+                num = None
+                number = False
+                email = False
+                email2 = False
                 choice = int(input(
-                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Repu") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Dorks", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
                 if choice == 1:
-                    Web.Reputation(username, report)
+                    Web.google_dork(username, number, num,email,email2)
                 else:
                     choice = int(input(
-                        Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Soc") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                        Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Repu") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
                     if choice == 1:
-                        Web.Profiles(username, report)
+                        Web.Reputation(username, report)
                     else:
                         choice = int(input(
-                            Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Robots") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                            Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Soc") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
                         if choice == 1:
-                            Web.Robots(username, report)
+                            Web.Profiles(username, report)
                         else:
                             choice = int(input(
-                                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Ports") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Robots") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
                             if choice == 1:
-                                Web.Ports(username, report)
+                                Web.Robots(username, report)
                             else:
                                 choice = int(input(
-                                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Traceroute") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                                    Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Ports") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
                                 if choice == 1:
-                                    Web.trace(username, report)
-
-        f = open(report, "a")
-        f.write(Language.Translation.Translate_Language(
-            filename, "Report", "Default", "By"))
-        f.close()
-        print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
-              report)
-        Notification.Notifier.Start(Mode)
-        Creds.Sender.mail(report, username)
-        choice = int(input(
-            Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Transfer", "Question", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
-        if choice == 1:
-            FileTransfer.Transfer.File(report, username, ".txt")
-        Encoding.Encoder.Encode(report)
-        inp = input(Language.Translation.Translate_Language(
-            filename, "Default", "Continue", "None"))
+                                    Web.Ports(username, report)
+                                else:
+                                    choice = int(input(
+                                        Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Website", "Questions", "Traceroute") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+                                    if choice == 1:
+                                        Web.trace(username, report)
+    
+            f = open(report, "a")
+            f.write(Language.Translation.Translate_Language(
+                filename, "Report", "Default", "By"))
+            f.close()
+            print(Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "Report", "None") +
+                  report)
+            Notification.Notifier.Start(Mode)
+            Creds.Sender.mail(report, username)
+            choice = int(input(
+                Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Transfer", "Question", "None") + Font.Color.GREEN + "[#MR.KRONOS#]" + Font.Color.WHITE + "-->"))
+            if choice == 1:
+                FileTransfer.Transfer.File(report, username, ".txt")
+            Encoding.Encoder.Encode(report)
+            inp = input(Language.Translation.Translate_Language(
+                filename, "Default", "Continue", "None"))
+        except KeyboardInterrupt:
+            raise
+        except Exception as e:
+            print("\n[!] ERROR in {}: {}".format("Core/Searcher_website.py", str(e)))
+            import traceback
+            traceback.print_exc()
+    

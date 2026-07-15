@@ -15,7 +15,10 @@ class Translation:
         Config_file = "Configuration/Configuration.ini"
         Parser = ConfigParser()
         Parser.read(Config_file)
+        try:
         Lang = Parser["Settings"]["language"]
+    except:
+        Lang = "english"
         filename = "Lang/{}.json".format(Lang)
         if os.path.isfile(filename):
             filename = filename
@@ -48,7 +51,10 @@ class Translation:
         Config_file = "Configuration/Configuration.ini"
         Parser = ConfigParser()
         Parser.read(Config_file)
+        try:
         Lang = Parser["Settings"]["language"]
+    except:
+        Lang = "english"
         filename = "Lang/{}.json".format(Lang)
         if os.path.isfile(filename):
             Lang = Lang.upper()

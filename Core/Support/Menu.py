@@ -217,4 +217,17 @@ class Main:
             except ValueError as e:
                 print(Font.Color.RED + "[!]" + Font.Color.WHITE +
                       Language.Translation.Translate_Language(filename, "Default", "ValueError", "None") + "{}".format(str(e)))
+                import traceback
+                traceback.print_exc()
+            except KeyboardInterrupt:
+                print(Font.Color.RED + "\n[!]" + Font.Color.WHITE + " INTERRUPTED BY USER")
                 exit()
+            except Exception as e:
+                print(Font.Color.RED + "[!]" + Font.Color.WHITE + " ERROR: {} - {}".format(type(e).__name__, str(e)))
+                import traceback
+                traceback.print_exc()
+                print(Font.Color.YELLOW + "\n[!]" + Font.Color.WHITE + " Press ENTER to continue...")
+                try:
+                    input()
+                except:
+                    pass
