@@ -54,10 +54,15 @@ class info:
 
     @staticmethod
     def Profile_Pic(username, profile_pic, SiteName, Opt,name2):
+        if not profile_pic or str(profile_pic) in ("", "None", "null"):
+            return
         image = "GUI/Reports/{}/{}/Profile_pics/Profile_pic_{}.jpg".format(
         Opt, name2, SiteName)
-        getter = requests.get(
-            profile_pic, headers=headers, allow_redirects=True)
+        try:
+            getter = requests.get(
+                profile_pic, headers=headers, allow_redirects=True, timeout=15)
+        except:
+            return
         try:
             try:
                   open(image, "wb+").write(getter.content)
@@ -95,7 +100,7 @@ class info:
             user = converted["username"]
             bio = converted["bio"]
             reputation = converted["reputation_count"]
-            profile_pic = converted["avatar_url"]
+            profile_pic = converted.get("avatar_url", "") if isinstance(converted, dict) else ""
             cover_url = converted["cover_url"]
             creation = converted["created_at"]
 
@@ -270,7 +275,7 @@ class info:
             is_pro = converted["is_pro"]
             is_premium = converted["is_premium"]
             created = converted["created_time"]
-            profile_pic = converted["pictures"]["640wx640h"]
+            profile_pic = converted.get("pictures", {}).get("640wx640h", "") if isinstance(converted, dict) else ""
 
             print(Font.Color.YELLOW +
                   "[v]" + Font.Color.WHITE + "USERNAME: {}".format(usern2))
@@ -350,9 +355,10 @@ class info:
             posts = _safe_text(reader.find("span", class_="total_posts"))
             InstagramParams.append(posts)
             profile = reader.find_all("div", class_="profile-avatar")
+            profile_pic = ""
             for image in profile:
-                profile_pic = image.find(
-                        "a", class_="profile-hd-link launchLightbox")["data-video-poster"]
+                el = image.find("a", class_="profile-hd-link launchLightbox")
+                profile_pic = el.get("data-video-poster", "") if el else ""
                 print(Font.Color.YELLOW + "[v]" +
                       Font.Color.WHITE + "USERNAME: {}".format(username))
                 print(Font.Color.YELLOW + "[v]" +
@@ -455,7 +461,7 @@ class info:
                 user = reader.find(
                     "a", href=True, class_="profile-card-fullname")
                 pic = reader.find("a", href=True, class_="profile-card-avatar")
-                profile_pic = url.replace("/"+username, "") + pic["href"]
+                profile_pic = url.replace("/"+username, "") + str(pic.get("href", "")) if pic else ""
                 print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE +
                       "USER: " + user["href"].replace("/", ""))
                 follower_items = reader.find_all("li", class_="followers")
@@ -684,7 +690,7 @@ class info:
             name = converted[0]["name"]
             user = converted[0]["username"]
             status = converted[0]["state"]
-            profile_pic = converted[0]["avatar_url"].replace("&", "0&")
+            profile_pic = (converted[0].get("avatar_url", "") if len(converted) > 0 and isinstance(converted[0], dict) else "").replace("&", "0&")
 
             print(Font.Color.YELLOW + "[v]" +
                   Font.Color.WHITE + "ID: {}".format(id_user))
@@ -742,7 +748,7 @@ class info:
             modification = converted["modifyDate"]
             followers = converted["numFollowers"]
             following = converted["numFollowing"]
-            profile_pic = converted["avatar"]
+            profile_pic = converted.get("avatar", "") if isinstance(converted, dict) else ""
             bio = converted["description"]
             gender = converted["gender"]
             Location = converted["location"]
@@ -824,7 +830,7 @@ class info:
             modification = converted["updated_at"]
             followers = converted["followers"]
             following = converted["following"]
-            profile_pic = converted["avatar_url"]
+            profile_pic = converted.get("avatar_url", "") if isinstance(converted, dict) else ""
             bio = converted["bio"]
             blog = converted["blog"]
             location = converted["location"]
@@ -1330,7 +1336,7 @@ class info:
             else:
                 name = "None"
             if "avatar" in reader:
-                  profile_pic = converted["avatar"]
+                  profile_pic = converted.get("avatar", "") if isinstance(converted, dict) else ""
             else:
                 profile_pic = "None"
             if "title" in reader:
