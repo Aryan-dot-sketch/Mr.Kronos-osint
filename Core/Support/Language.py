@@ -16,9 +16,9 @@ class Translation:
         Parser = ConfigParser()
         Parser.read(Config_file)
         try:
-        Lang = Parser["Settings"]["language"]
-    except:
-        Lang = "english"
+            Lang = Parser["Settings"]["language"]
+        except:
+            Lang = "english"
         filename = "Lang/{}.json".format(Lang)
         if os.path.isfile(filename):
             filename = filename
@@ -52,9 +52,9 @@ class Translation:
         Parser = ConfigParser()
         Parser.read(Config_file)
         try:
-        Lang = Parser["Settings"]["language"]
-    except:
-        Lang = "english"
+            Lang = Parser["Settings"]["language"]
+        except:
+            Lang = "english"
         filename = "Lang/{}.json".format(Lang)
         if os.path.isfile(filename):
             Lang = Lang.upper()
