@@ -605,7 +605,7 @@ class Web:
                             username, num)
                         if os.path.exists(folder):
                             shutil.rmtree(folder)
-                        os.mkdir(folder)
+                        os.makedirs(folder, exist_ok=True)
                         report2 = folder + "/{}.txt".format(num)
                         f = open(report2, "w")
                         f.write("\nPHONE NUMBER DATA:\n")
@@ -629,7 +629,7 @@ class Web:
                     if sc == 1:
                         folder = folder = "GUI/Reports/Websites/{}/{}".format(
                                 username, email2)
-                        os.mkdir(folder)
+                        os.makedirs(folder, exist_ok=True)
                         report2 = folder + "/{}.txt".format(email2)
                         try:
                             Mail.Mail_search.Lookup(email2,report2)
@@ -736,7 +736,7 @@ class Web:
             shutil.rmtree(folder)
             print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
                   Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
-        os.mkdir(folder)
+        os.makedirs(folder, exist_ok=True)
         report = "GUI/Reports/Websites/{}/{}.txt".format(username, username)
         report_Ip = "GUI/Reports/Websites/Coordinates/Ip_Geolocation/" + username + ".json"
         now = datetime.now()

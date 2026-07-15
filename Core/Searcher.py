@@ -36,7 +36,7 @@ class MrKronos:
         if os.path.isdir("Profile_pics"):
             pass
         else:
-            os.mkdir("Profile_pics")
+            os.makedirs("Profile_pics", exist_ok=True)
         os.chdir("../../../../")
         #http_proxy = None
         try:
@@ -240,7 +240,7 @@ class MrKronos:
             print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
                   Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
         else:
-            os.mkdir(folder)
+            os.makedirs(folder, exist_ok=True)
         now = datetime.now()
         dataformat = DateFormat.Get.Format()
         dt_string = now.strftime(dataformat)
@@ -307,7 +307,7 @@ class MrKronos:
                     if os.path.isdir("Profile_pics"):
                         pass
                     else:
-                        os.mkdir("Profile_pics")
+                        os.makedirs("Profile_pics", exist_ok=True)
                     os.chdir("../../../../")
                     choice = int(input(Font.Color.BLUE + "\n[?]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Username", "Default", "Scraper") +
                                 Font.Color.GREEN + "[*MR.KRONOS*]" + Font.Color.WHITE + "-->"))

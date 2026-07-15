@@ -191,7 +191,7 @@ class Mail_search:
             print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
                   Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
         else:
-            os.mkdir(folder)
+            os.makedirs(folder, exist_ok=True)
         f = open(report, "w")
         f.write("SCANNING EXECUTED ON:\n" + Date + "\n")
         f.close()

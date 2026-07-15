@@ -250,7 +250,7 @@ class Phone_search:
             shutil.rmtree(folder)
             print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE +
                   Language.Translation.Translate_Language(filename, "Default", "Delete", "None").format(username))
-        os.mkdir(folder)
+        os.makedirs(folder, exist_ok=True)
         report = folder + username + ".txt"
         f = open(report, "w")
         f.write(Language.Translation.Translate_Language(
