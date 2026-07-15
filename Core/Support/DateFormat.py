@@ -29,7 +29,8 @@ class Get:
             localformat = "YYYY/MM/DD"
         else:
             dateregex = "%d/%m/%Y %H:%M:%S"
-        Zone = dataformat.upper() + ":"+ localformat
+            localformat = "DD/MM/YYYY"
+        Zone = dataformat.upper() + ":" + localformat
         print(Font.Color.BLUE + "\n[I]" + Font.Color.WHITE + Language.Translation.Translate_Language(filename, "Default", "DateFormat", "None").format("[" + Font.Color.GREEN + Zone + Font.Color.WHITE + "]")) 
         return dateregex  
     
