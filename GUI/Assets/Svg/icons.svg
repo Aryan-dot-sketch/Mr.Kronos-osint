@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  
+  <!-- Kronos Monogram -->
+  <symbol id="kronos-monogram" viewBox="0 0 80 80">
+    <circle cx="40" cy="40" r="36" fill="none" stroke="#1a2744" stroke-width="2"/>
+    <circle cx="40" cy="40" r="36" fill="none" stroke="#c8a84e" stroke-width="1" transform="scale(0.88) translate(5.4, 5.4)"/>
+    <text x="40" y="52" text-anchor="middle" font-family="Georgia, serif" font-size="38" font-weight="bold" fill="#1a2744">K</text>
+  </symbol>
+
+  <!-- Username/Search -->
+  <symbol id="icon-username" viewBox="0 0 64 64">
+    <circle cx="24" cy="22" r="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M8 54c0-12 8-18 16-18s16 6 16 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="48" cy="48" r="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="56" y1="56" x2="62" y2="62" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Website/Globe -->
+  <symbol id="icon-website" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="2"/>
+    <ellipse cx="32" cy="32" rx="14" ry="28" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="4" y1="32" x2="60" y2="32" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="32" y1="4" x2="32" y2="60" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+
+  <!-- Phone -->
+  <symbol id="icon-phone" viewBox="0 0 64 64">
+    <rect x="16" y="4" width="32" height="56" rx="7" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="32" cy="16" r="2.5" fill="currentColor"/>
+    <circle cx="32" cy="48" r="2.5" fill="currentColor"/>
+    <line x1="22" y1="30" x2="42" y2="30" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+    <line x1="22" y1="36" x2="36" y2="36" stroke="currentColor" stroke-width="1.5" opacity="0.25"/>
+  </symbol>
+
+  <!-- Port Scanner -->
+  <symbol id="icon-ports" viewBox="0 0 64 64">
+    <rect x="8" y="8" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="36" y="8" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="8" y="36" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="36" y="36" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="14" y="14" width="8" height="8" rx="1" fill="currentColor" opacity="0.5"/>
+    <rect x="42" y="14" width="8" height="8" rx="1" fill="currentColor" opacity="0.25"/>
+    <rect x="42" y="42" width="8" height="8" rx="1" fill="currentColor" opacity="0.25"/>
+  </symbol>
+
+  <!-- Email -->
+  <symbol id="icon-email" viewBox="0 0 64 64">
+    <rect x="6" y="14" width="52" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <polyline points="6,14 32,36 58,14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- People -->
+  <symbol id="icon-people" viewBox="0 0 64 64">
+    <circle cx="20" cy="18" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M6 50c0-8 6-12 14-12s14 4 14 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="44" cy="22" r="7" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+    <path d="M36 48c0-6 4-9 8-9s8 3 8 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  </symbol>
+
+  <!-- Graph -->
+  <symbol id="icon-graph" viewBox="0 0 64 64">
+    <polyline points="8,52 8,56 56,56" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="14,56 14,28 28,18 38,40 48,22 56,8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="14" cy="28" r="2.5" fill="currentColor"/>
+    <circle cx="28" cy="18" r="2.5" fill="currentColor"/>
+    <circle cx="38" cy="40" r="2.5" fill="currentColor"/>
+    <circle cx="48" cy="22" r="2.5" fill="currentColor"/>
+  </symbol>
+
+  <!-- Map -->
+  <symbol id="icon-map" viewBox="0 0 64 64">
+    <path d="M32 8C22 8 16 16 16 26c0 14 16 30 16 30s16-16 16-30c0-10-6-18-16-18z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="32" cy="26" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="32" cy="26" r="2" fill="currentColor"/>
+  </symbol>
+
+  <!-- Author -->
+  <symbol id="icon-author" viewBox="0 0 64 64">
+    <path d="M12 46L6 16l12 8 14-14 14 14 12-8-6 30z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="16" y="46" width="32" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <rect x="12" y="54" width="40" height="4" rx="1" fill="currentColor" opacity="0.3"/>
+  </symbol>
+
+  <!-- Shield -->
+  <symbol id="icon-shield" viewBox="0 0 64 64">
+    <path d="M32 4L8 16v18c0 16 24 26 24 26s24-10 24-26V16z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    <polyline points="24,30 30,38 42,22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- Gear -->
+  <symbol id="icon-settings" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M32 8v6m0 36v6M8 32h6m36 0h6M15 15l4 4m26 26l4 4M49 15l-4 4M15 49l4-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Alert -->
+  <symbol id="icon-warning" viewBox="0 0 64 64">
+    <path d="M32 8L6 56h52z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    <line x1="32" y1="26" x2="32" y2="40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="32" cy="48" r="2" fill="currentColor"/>
+  </symbol>
+
+</svg>
