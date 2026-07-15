@@ -17,6 +17,39 @@ filename = Language.Translation.Get_Language()
 filename
 
 
+
+# ── Kronos v3.0 Safe Scraper Helpers ──
+
+def _safe_json(text, default={}):
+    """Safely parse JSON, returning default on failure."""
+    try:
+        import json
+        return json.loads(text) if text else default
+    except:
+        return default
+
+def _safe_text(element, default=""):
+    """Safely get .text from a BeautifulSoup element, returning default if None."""
+    return element.text.strip() if element else default
+
+def _safe_get(d, key, default=""):
+    """Safely get a dict key or JSON field."""
+    try:
+        val = d.get(key, default)
+        return val if val is not None else default
+    except:
+        return default
+
+def _safe_find(root, tag, attrs=None, default=None):
+    """Safely find an element, returning default if root is None or element missing."""
+    if root is None:
+        return default
+    try:
+        result = root.find(tag, attrs) if attrs else root.find(tag)
+        return result
+    except:
+        return default
+
 class info:
 
     @staticmethod
@@ -56,7 +89,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["id"]
             user = converted["username"]
@@ -116,7 +149,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["user"]["id"]
             user = converted["user"]["name"]
@@ -173,7 +206,7 @@ class info:
         url
         openurl = requests.get(url, proxies=http_proxy, headers=headers)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["user"]["id"]
             user = converted["user"]["username"]
@@ -227,7 +260,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=30)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             user = converted["name"]
             usern2 = converted["username"]
@@ -309,12 +342,12 @@ class info:
             InstagramParams.append(IsPrivate1)
             Flag = True
             reader = soup(openurl.content, "html.parser")
-            name = reader.find("h2", class_="profile-name-bottom").text
-            followers = reader.find("span", class_="followed_by").text
+            name = _safe_text(reader.find("h2", class_="profile-name-bottom"))
+            followers = _safe_text(reader.find("span", class_="followed_by"))
             InstagramParams.append(followers)
-            followed = reader.find("span", class_="follows").text
-            bio = reader.find("div", class_="profile-description").text
-            posts = reader.find("span", class_="total_posts").text
+            followed = _safe_text(reader.find("span", class_="follows"))
+            bio = _safe_text(reader.find("div", class_="profile-description"))
+            posts = _safe_text(reader.find("span", class_="total_posts"))
             InstagramParams.append(posts)
             profile = reader.find_all("div", class_="profile-avatar")
             for image in profile:
@@ -427,8 +460,8 @@ class info:
                       "USER: " + user["href"].replace("/", ""))
                 follower_items = reader.find_all("li", class_="followers")
                 for item in follower_items:
-                    follower = item.find(
-                        "span", class_="profile-stat-num").text
+                    follower = _safe_text(item.find(
+                        "span", class_="profile-stat-num"))
                     print(Font.Color.YELLOW +
                           "[v]" + Font.Color.WHITE + "FOLLWERS: {}".format(follower))
                 TwitterParams.append(follower)
@@ -436,7 +469,7 @@ class info:
 
                 post_items = reader.find_all("li", class_="posts")
                 for item in post_items:
-                    posts = item.find("span", class_="profile-stat-num").text
+                    posts = _safe_text(item.find("span", class_="profile-stat-num"))
                     print(Font.Color.YELLOW +
                           "[v]" + Font.Color.WHITE + "POSTS: {}".format(posts))
                 TwitterParams.append(posts)
@@ -444,8 +477,8 @@ class info:
                
                 followed_item = reader.find_all("li", class_="following")
                 for item in followed_item:
-                    followed = item.find(
-                        "span", class_="profile-stat-num").text
+                    followed = _safe_text(item.find(
+                        "span", class_="profile-stat-num"))
                     print(Font.Color.YELLOW +
                           "[v]" + Font.Color.WHITE + "FOLLOWING: {}".format(followed))
                 print(Font.Color.YELLOW +
@@ -522,7 +555,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["id"]
             user = converted["username"]
@@ -583,7 +616,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             target = []
             profile = []
@@ -645,7 +678,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted[0]["id"]
             name = converted[0]["name"]
@@ -700,7 +733,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             user = converted["username"]
             votes = converted["votesReceived"]
@@ -782,7 +815,7 @@ class info:
             url
             openurl = requests.get(url, proxies=http_proxy,
                                    headers=headers, timeout=15)
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             user = converted["login"]
             repositories = converted["public_repos"]
@@ -882,13 +915,13 @@ class info:
         Flag = True
         try:
             reader = soup(openurl.content, "html.parser")
-            user = reader.find("h1", class_="user").text
-            name = reader.find("h5", class_="text-dark").text
-            followers = reader.find(
-                "div", class_="col-7 col-md-auto text-truncate").text.replace("🦄","").replace(" ","",1)
-            followed = reader.find(
-                "div", class_="col-auto d-none d-sm-block text-truncate").text.replace("🏹","").replace(" ","",1)
-            like = reader.find("div", class_="col-auto").text.replace("🧡","").replace(" ","",1)
+            user = _safe_text(reader.find("h1", class_="user"))
+            name = _safe_text(reader.find("h5", class_="text-dark"))
+            followers = _safe_text(reader.find(
+                "div", class_="col-7 col-md-auto text-truncate")).replace("🦄","").replace(" ","",1)
+            followed = _safe_text(reader.find(
+                "div", class_="col-auto d-none d-sm-block text-truncate")).replace("🏹","").replace(" ","",1)
+            like = _safe_text(reader.find("div", class_="col-auto")).replace("🧡","").replace(" ","",1)
             profile = reader.find_all(
                 "div", class_="col-md-auto justify-content-center text-center")
             postsect = reader.find_all("div", class_="info3")
@@ -962,7 +995,7 @@ class info:
         url
         openurl = requests.get(url, proxies=http_proxy, headers=headers)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["id"]
             user = converted["name"]
@@ -997,7 +1030,7 @@ class info:
         try:
             reader = soup(openurl.content, "html.parser")
             profile_pic = reader.find("img", class_="pfp")["src"]
-            clicks = reader.find("span", class_="clickCount").text
+            clicks = _safe_text(reader.find("span", class_="clickCount"))
             print(Font.Color.YELLOW + "[v]" +
                   Font.Color.WHITE + "USERNAME: {}".format(username))
             print(Font.Color.YELLOW + "[v]" +
@@ -1037,7 +1070,7 @@ class info:
         url
         openurl = requests.get(url, proxies=http_proxy, headers=headers)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["response"]["id"]
             user = converted["response"]["username"]
@@ -1150,7 +1183,7 @@ class info:
             url
             openurl = requests.get(url, proxies=http_proxy,
                                    headers=headers, timeout=15)
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             hashid = converted["entry"][0]["hash"]
             user = converted["entry"][0]["preferredUsername"]
@@ -1226,7 +1259,7 @@ class info:
         openurl = requests.get(url, proxies=http_proxy,
                                headers=headers, timeout=15)
         try:
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             id_user = converted["id"]
             user = converted["username"]
@@ -1287,7 +1320,7 @@ class info:
             url
             openurl = requests.get(url, proxies=http_proxy,
                                    headers=headers, timeout=15)
-            reader = openurl.text
+            reader = openurl.text if openurl else ""
             converted = json.loads(reader)
             profile_id = converted["player_id"]
             user = converted["username"]

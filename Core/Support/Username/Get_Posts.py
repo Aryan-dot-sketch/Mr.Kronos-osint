@@ -21,6 +21,30 @@ LangFile = Language.Translation.Get_Language()
 LangFile
 
 
+
+# ── Kronos v3.0 Safe Scraper Helpers ──
+def _safe_text(element, default=""):
+    """Safely get .text from a BeautifulSoup element, returning default if None."""
+    return element.text.strip() if element else default
+
+def _safe_get(d, key, default=""):
+    """Safely get a dict key or JSON field."""
+    try:
+        val = d.get(key, default)
+        return val if val is not None else default
+    except:
+        return default
+
+def _safe_find(root, tag, attrs=None, default=None):
+    """Safely find an element, returning default if root is None or element missing."""
+    if root is None:
+        return default
+    try:
+        result = root.find(tag, attrs) if attrs else root.find(tag)
+        return result
+    except:
+        return default
+
 class Downloader:
 
     @staticmethod
@@ -180,8 +204,8 @@ class Downloader:
                                 "/{}.txt".format(arr_name[j-1])
                             print(Font.Color.GREEN + "\n[+]" + Font.Color.WHITE +
                                   Language.Translation.Translate_Language(LangFile, "Username", "Instagram", "Details").format(str(j)))
-                            descr = info.find(
-                                "div", class_="photo-description").text
+                            descr = _safe_text(info.find(
+                                "div", class_="photo-description"))
                             if "#" in descr:
                                 count = descr.count("#")
                                 text = str(descr.split("#", 1)[1])
@@ -216,8 +240,8 @@ class Downloader:
                                     pass
                                 else:
                                     TaggedUser.append(tagged)
-                            location = info.find(
-                                "div", class_="photo-location").text
+                            location = _safe_text(info.find(
+                                "div", class_="photo-location"))
                             print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE +
                                   "DESCRIPTION: {}".format(descr.strip()))
                             print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE +
@@ -350,7 +374,7 @@ class Downloader:
                                 "/{}.txt".format(arr_name[t-1])
                             print(Font.Color.GREEN + "\n[+]" + Font.Color.WHITE +
                                   Language.Translation.Translate_Language(LangFile, "Username", "Instagram", "Data").format(str(t)))
-                            time = info.find("span").text
+                            time = _safe_text(info.find("span"))
                             print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE +
                                   "POSTED: {}".format(time.strip()))
 
@@ -539,14 +563,14 @@ class Downloader:
                             print(Font.Color.RED +
                                   "[!]" + Font.Color.WHITE + Language.Translation.Translate_Language(LangFile, "Username", "Twitter", "No_Image"))
 
-                    text = info.find(
-                        "div", class_="tweet-content media-body").text
+                    text = _safe_text(info.find(
+                        "div", class_="tweet-content media-body"))
                     TempUser = []
                     TempHashtag = []
                     TempLinks = []
                     if text:
-                        desc = info.find(
-                            "div", class_="tweet-content media-body").text
+                        desc = _safe_text(info.find(
+                            "div", class_="tweet-content media-body"))
                         print(
                             Font.Color.YELLOW + "[v]" + Font.Color.WHITE + "DESCRIPTION: {}".format(desc))
                         taggedArea = info.find_all(
@@ -604,7 +628,7 @@ class Downloader:
                         Font.Color.YELLOW + "[v]" + Font.Color.WHITE + "RETWEETS: {}".format(retweet))
                     print(Font.Color.YELLOW +
                           "[v]" + Font.Color.WHITE + "QUOTES: {}".format(quote))
-                    date = info.find("span", class_="tweet-date").text
+                    date = _safe_text(info.find("span", class_="tweet-date"))
                     print(Font.Color.YELLOW +
                           "[v]" + Font.Color.WHITE + "POSTED ON: {}".format(date))
                     print(Font.Color.YELLOW +
@@ -802,10 +826,10 @@ class Downloader:
                             LangFile, "Username", "Default", "Success"))
                         Downloader.checkFile(reportImage,"Image")
                         sleep(2)
-                        details = reader2.find("video").text
+                        details = _safe_text(reader2.find("video"))
                         print(Font.Color.YELLOW + "[V]" + Font.Color.WHITE +
                               "DETAILS: {}".format(details.replace("\n", "")))
-                        date = reader2.find("h6").text
+                        date = _safe_text(reader2.find("h6"))
                         print(
                             Font.Color.YELLOW + "[V]" + Font.Color.WHITE + "POSTED ON: {}".format(date))
                         stats = reader2.find_all("div", class_="row mt-3 mb-1 stats")
@@ -823,7 +847,7 @@ class Downloader:
                         print(
                             Font.Color.YELLOW + "[V]" + Font.Color.WHITE + "SHARES: {}".format(shares))"""
                         if '<div class="music">' in openurl2.text:
-                            music = reader2.find("div", class_="music").text.replace("🎵","").replace(" ","",1)
+                            music = _safe_text(reader2.find("div", class_="music")).replace("🎵","").replace(" ","",1)
                             print(
                                 Font.Color.YELLOW + "[V]" + Font.Color.WHITE + "SONG: {}".format(music.replace("\n", "")))
                         else:
@@ -841,7 +865,7 @@ class Downloader:
                                 if "#" in tagged:
                                     tagged = tagged.replace("#", "")
                                     if "https" in tagged or "http" in tagged:
-                                        Text = Tag.find("p").text
+                                        Text = _safe_text(Tag.find("p"))
                                         TempLinks.append(Text)
                                         if tagged in TaggedLink:
                                             pass

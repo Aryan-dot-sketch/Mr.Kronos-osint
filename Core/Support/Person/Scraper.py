@@ -19,6 +19,30 @@ filename
 headers = Headers.Get.classic()
 
 
+
+# ── Kronos v3.0 Safe Scraper Helpers ──
+def _safe_text(element, default=""):
+    """Safely get .text from a BeautifulSoup element, returning default if None."""
+    return element.text.strip() if element else default
+
+def _safe_get(d, key, default=""):
+    """Safely get a dict key or JSON field."""
+    try:
+        val = d.get(key, default)
+        return val if val is not None else default
+    except:
+        return default
+
+def _safe_find(root, tag, attrs=None, default=None):
+    """Safely find an element, returning default if root is None or element missing."""
+    if root is None:
+        return default
+    try:
+        result = root.find(tag, attrs) if attrs else root.find(tag)
+        return result
+    except:
+        return default
+
 class Search:
    @staticmethod
    def Instagram(report, username, http_proxy, InstagramParams, PostLocations, PostGpsCoordinates, imagefold, username2,fold):
@@ -42,7 +66,7 @@ class Search:
                     "\n\n--------------------------------\nSHOWING INSTAGRAM RESULTS FOR: {}\n".format(username))
                 for user in users:
                     if i <= 20:
-                        usern = user.find("div",class_="result-username").text.replace("@","")
+                        usern = _safe_text(user.find("div",class_="result-username")).replace("@","")
                         pic = user.find_all("div",class_="result-ava")
                         for image in pic:
                             profilepic = image.find("img")["src"]
@@ -148,16 +172,16 @@ class Search:
                     "--------------------------------\nSHOWING TWITTER RESULTS FOR: {}\n".format(username))
                 for user in users:
                     if i <= 20:
-                        usern = user.find(
-                            "a", class_="username").text.replace("@", "")
+                        usern = _safe_text(user.find(
+                            "a", class_="username")).replace("@", "")
                         pic = user.find("img",class_="avatar round")["src"]
                         profilepic = "https://nitter.net" + pic
                         Pics.append(profilepic)
                         link = "https://twitter.com/{}".format(usern)
-                        bio = user.find(
-                            "div", class_="tweet-content media-body").text
-                        full_name = user.find(
-                            "a", class_="fullname").text
+                        bio = _safe_text(user.find(
+                            "div", class_="tweet-content media-body"))
+                        full_name = _safe_text(user.find(
+                            "a", class_="fullname"))
                         print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + "USER FOUND: {}".format(
                             Font.Color.GREEN + usern + Font.Color.WHITE))
                         print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + "NAME FOUND: {}".format(
@@ -267,11 +291,11 @@ class Search:
                     "--------------------------------\nSHOWING TIKTOK RESULTS FOR: {}\n".format(username))
                 for user in users:
                     if i <= 20:
-                        usern = user.find(
-                            "a", class_="uri").text
+                        usern = _safe_text(user.find(
+                            "a", class_="uri"))
                         link = "https://tiktok.com/{}".format(usern)
-                        followers = user.find(
-                            "span", class_="followers").text
+                        followers = _safe_text(user.find(
+                            "span", class_="followers"))
                         print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + "USER FOUND: {}".format(
                             Font.Color.GREEN + usern.replace("@","") + Font.Color.WHITE))
                         print(Font.Color.YELLOW + "[v]" + Font.Color.WHITE + "FOLLOWERS: {}".format(
